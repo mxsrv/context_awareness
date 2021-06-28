@@ -1,4 +1,4 @@
-import 'dart:io';
+rimport 'dart:io';
 
 import 'package:activity_recognition_flutter/activity_recognition_flutter.dart';
 import 'package:flutter/material.dart';
