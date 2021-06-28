@@ -14,7 +14,7 @@ The application requests authorization for your location and activity while it i
 Before you begin, make sure that the following requirements are met:
 
 * android-sdk version 28 with android-studio.
-* working flutter installation (we tested with version 1.22.4). You can either install flutter manually or use the provided nix-shell by executing ` nix-shell` in CLI.
+* working flutter installation (we tested with version 2.2.1).
 * You either have a mobile device (at the moment only android is supported) connected to your workstation in debug mode or an android emulator setup.
 
 
