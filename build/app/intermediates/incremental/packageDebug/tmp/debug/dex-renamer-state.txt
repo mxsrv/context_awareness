@@ -1,0 +1,4 @@
+#Mon Jun 28 17:48:51 CEST 2021
+base.0=/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

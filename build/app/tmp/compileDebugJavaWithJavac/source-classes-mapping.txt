@@ -1,0 +1,6 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/tk3/context_awareness/BuildConfig.java
+ com.tk3.context_awareness.BuildConfig
+com/tk3/context_awareness/MainActivity.java
+ com.tk3.context_awareness.MainActivity

@@ -1,0 +1,136 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tk3.context_awareness"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="30" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/debug/AndroidManifest.xml:6:22-64
+15    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+15-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:50:5-79
+15-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:50:22-76
+16    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+16-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:51:5-94
+16-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:51:22-91
+17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+17-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:52:5-77
+17-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:52:22-74
+18    <uses-permission android:name="android.permission.LOCATION" />
+18-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:53:5-67
+18-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:53:22-64
+19
+20    <application
+20-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:3:4-48:19
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.1.0] /home/max/.gradle/caches/transforms-2/files-2.1/d67cd79abd1ca209502f51c69d23182b/core-1.1.0/AndroidManifest.xml:24:18-86
+22        android:debuggable="true"
+23        android:icon="@mipmap/ic_launcher"
+23-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:5:9-43
+24        android:label="context_awareness" >
+24-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:4:9-42
+25        <activity
+25-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:6:9-34:20
+26            android:name="com.tk3.context_awareness.MainActivity"
+26-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:7:13-41
+27            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+27-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:10:13-163
+28            android:hardwareAccelerated="true"
+28-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:11:13-47
+29            android:launchMode="singleTop"
+29-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:8:13-43
+30            android:theme="@style/LaunchTheme"
+30-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:9:13-47
+31            android:windowSoftInputMode="adjustResize" >
+31-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:12:13-55
+32
+33            <!--
+34                 Specifies an Android theme to apply to this Activity as soon as
+35                 the Android process has started. This theme is visible to the user
+36                 while the Flutter UI initializes. After that, this theme continues
+37                 to determine the Window background behind the Flutter UI.
+38            -->
+39            <meta-data
+39-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:17:13-20:17
+40                android:name="io.flutter.embedding.android.NormalTheme"
+40-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:18:15-70
+41                android:resource="@style/NormalTheme" />
+41-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:19:15-52
+42            <!--
+43                 Displays an Android View that continues showing the launch screen
+44                 Drawable until Flutter paints its first frame, then this splash
+45                 screen fades out. A splash screen is useful to avoid any visual
+46                 gap between the end of Android's launch screen and the painting of
+47                 Flutter's first frame.
+48            -->
+49            <meta-data
+49-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:26:13-29:17
+50                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+50-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:27:15-79
+51                android:resource="@drawable/launch_background" />
+51-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:28:15-61
+52
+53            <intent-filter>
+53-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:30:13-33:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:31:17-68
+54-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:31:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:32:17-76
+56-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:32:27-74
+57            </intent-filter>
+58        </activity>
+59        <!--
+60             Don't delete the meta-data below.
+61             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+62        -->
+63        <meta-data
+63-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:37:9-39:33
+64            android:name="flutterEmbedding"
+64-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:38:13-44
+65            android:value="2" />
+65-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:39:13-30
+66
+67        <!-- configuration for the activity recognition service -->
+68        <receiver android:name="dk.cachet.activity_recognition_flutter.ActivityRecognizedBroadcastReceiver" />
+68-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:42:9-110
+68-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:42:19-108
+69
+70        <service
+70-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:43:9-46:38
+71            android:name="dk.cachet.activity_recognition_flutter.ActivityRecognizedService"
+71-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:44:13-92
+72            android:exported="true"
+72-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:46:13-36
+73            android:permission="android.permission.BIND_JOB_SERVICE" />
+73-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:45:13-69
+74        <service android:name="dk.cachet.activity_recognition_flutter.ForegroundService" />
+74-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:47:9-92
+74-->/home/max/Dokumente/Uni/TK3/Projekt/context_awareness/android/app/src/main/AndroidManifest.xml:47:18-89
+75
+76        <activity
+76-->[com.google.android.gms:play-services-base:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/f43cb71875b3c46f93b97a545e5cbe23/jetified-play-services-base-16.0.1/AndroidManifest.xml:23:9-26:75
+77            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+77-->[com.google.android.gms:play-services-base:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/f43cb71875b3c46f93b97a545e5cbe23/jetified-play-services-base-16.0.1/AndroidManifest.xml:24:13-79
+78            android:exported="false"
+78-->[com.google.android.gms:play-services-base:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/f43cb71875b3c46f93b97a545e5cbe23/jetified-play-services-base-16.0.1/AndroidManifest.xml:25:13-37
+79            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+79-->[com.google.android.gms:play-services-base:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/f43cb71875b3c46f93b97a545e5cbe23/jetified-play-services-base-16.0.1/AndroidManifest.xml:26:13-72
+80
+81        <meta-data
+81-->[com.google.android.gms:play-services-basement:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/2eb1386a6f10eb716f3c06bce936dbf5/jetified-play-services-basement-16.0.1/AndroidManifest.xml:23:9-25:69
+82            android:name="com.google.android.gms.version"
+82-->[com.google.android.gms:play-services-basement:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/2eb1386a6f10eb716f3c06bce936dbf5/jetified-play-services-basement-16.0.1/AndroidManifest.xml:24:13-58
+83            android:value="@integer/google_play_services_version" />
+83-->[com.google.android.gms:play-services-basement:16.0.1] /home/max/.gradle/caches/transforms-2/files-2.1/2eb1386a6f10eb716f3c06bce936dbf5/jetified-play-services-basement-16.0.1/AndroidManifest.xml:25:13-66
+84    </application>
+85
+86</manifest>
