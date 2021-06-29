@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:activity_recognition_flutter/activity_recognition_flutter.dart';
+import 'package:context_awareness/logic/activityTracker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,15 +13,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   late Stream<ActivityEvent> activityStream;
   ActivityEvent latestActivity = ActivityEvent.empty();
   List<ActivityEvent> _events = [];
   ActivityRecognition activityRecognition = ActivityRecognition.instance;
 
   Text switchContext() {
+    ActivityEvent current = ActivityEvent.empty();    
+
+    setState(() {
+      current = ActivityTracker.latestActivity;
+    });
     try {
-      switch (_events[_events.length-1].type.toString().split('.').last) {
+      switch (current.type.toString().split('.').last) {
         case "STILL":
           return Text("You are sitting",
               style: GoogleFonts.poppins(fontSize: 14));
@@ -51,16 +56,16 @@ class _HomePageState extends State<HomePage> {
     /// Android requires explicitly asking permission
     if (Platform.isAndroid) {
       if (await Permission.activityRecognition.request().isGranted) {
-        _startTracking();
+        ActivityTracker.startTracking();
       }
     }
 
     /// iOS does not
     else {
-      _startTracking();
+      ActivityTracker.startTracking();
     }
   }
-
+  /*
   void _startTracking() {
     activityStream =
         activityRecognition.startStream(runForegroundService: true);
@@ -74,41 +79,41 @@ class _HomePageState extends State<HomePage> {
       latestActivity = activityEvent;
     });
   }
+  */
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-            child: Align(
-              alignment: Alignment(0, -0.9),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'This is your current status:',
-                      style: GoogleFonts.poppins(fontSize: 14),
-                    ),
-                    switchContext(),
-                    Expanded(
-                      child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: _events.length,
-                          reverse: true,
-                          itemBuilder: (BuildContext context, int idx) {
-                            final entry = _events[idx];
-                            return ListTile(
-                                leading: Text(entry.timeStamp
-                                    .toString()
-                                    .substring(0, 19)),
-                                trailing: Text(
-                                    entry.type.toString().split('.').last));
-                          }),
-                    )
-                  ],
-                ),
+      child: Align(
+        alignment: Alignment(0, -0.9),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(
+                'This is your current status:',
+                style: GoogleFonts.poppins(fontSize: 14),
               ),
-            ),
-          );
+              switchContext(),
+              Expanded(
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: _events.length,
+                    reverse: true,
+                    itemBuilder: (BuildContext context, int idx) {
+                      final entry = _events[idx];
+                      return ListTile(
+                          leading:
+                              Text(entry.timeStamp.toString().substring(0, 19)),
+                          trailing:
+                              Text(entry.type.toString().split('.').last));
+                    }),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

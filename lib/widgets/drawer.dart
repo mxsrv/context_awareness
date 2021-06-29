@@ -1,3 +1,4 @@
+import 'package:context_awareness/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +21,7 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             title: Text("Settings",
                 style: GoogleFonts.poppins(fontSize: 14, color: Colors.black)),
-            onTap: () {},
+            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()),);},
           ),
           ListTile(
             title: Text("About",
