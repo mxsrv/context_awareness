@@ -17,15 +17,17 @@ class _HomePageState extends State<HomePage> {
   ActivityEvent latestActivity = ActivityEvent.empty();
   List<ActivityEvent> _events = [];
   ActivityRecognition activityRecognition = ActivityRecognition.instance;
+  late ActivityTracker tracker;
+
+  refresh() {
+    setState(() {
+      latestActivity = tracker.latestActivity;
+    });
+  }
 
   Text switchContext() {
-    ActivityEvent current = ActivityEvent.empty();    
-
-    setState(() {
-      current = ActivityTracker.latestActivity;
-    });
     try {
-      switch (current.type.toString().split('.').last) {
+      switch (latestActivity.type.toString().split('.').last) {
         case "STILL":
           return Text("You are sitting",
               style: GoogleFonts.poppins(fontSize: 14));
@@ -33,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           return Text("You are on a bicycle",
               style: GoogleFonts.poppins(fontSize: 14));
         case "ON_FOOT":
-          return Text("You are on foot",
+          return Text("You are walking",
               style: GoogleFonts.poppins(fontSize: 14));
         default:
           return Text("Unknown", style: GoogleFonts.poppins(fontSize: 14));
@@ -56,13 +58,15 @@ class _HomePageState extends State<HomePage> {
     /// Android requires explicitly asking permission
     if (Platform.isAndroid) {
       if (await Permission.activityRecognition.request().isGranted) {
-        ActivityTracker.startTracking();
+        tracker = ActivityTracker(notifyParent: refresh);
+        tracker.startTracking();
       }
     }
 
     /// iOS does not
     else {
-      ActivityTracker.startTracking();
+      tracker = ActivityTracker(notifyParent: refresh);
+      tracker.startTracking();
     }
   }
   /*
