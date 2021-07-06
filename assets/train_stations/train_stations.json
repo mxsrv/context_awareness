@@ -1,0 +1,200 @@
+{
+    "version": 0.6,
+    "generator": "Overpass API 0.7.56.9 76e5016d",
+    "osm3s": {
+      "timestamp_osm_base": "2021-06-29T14:50:17Z",
+      "timestamp_areas_base": "2021-06-29T14:07:43Z",
+      "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+    },
+    "elements": [
+  
+  {
+    "type": "node",
+    "id": 17658611,
+    "lat": 49.8144694,
+    "lon": 8.6259571,
+    "tags": {
+      "name": "Darmstadt-Eberstadt",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FDE",
+      "train": "yes",
+      "wheelchair": "yes",
+      "wikidata": "Q55609037"
+    }
+  },
+  {
+    "type": "node",
+    "id": 17658613,
+    "lat": 49.7604953,
+    "lon": 8.6036351,
+    "tags": {
+      "name": "Bickenbach (Bergstraße)",
+      "operator": "DB Station&Service AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:position": "40.744",
+      "railway:ref": "FBI",
+      "short_name": "Bickenbach (Bergstr.)",
+      "train": "yes",
+      "uic_ref": "8000948",
+      "wikidata": "Q800524"
+    }
+  },
+  {
+    "type": "node",
+    "id": 82641646,
+    "lat": 49.9096490,
+    "lon": 8.5797158,
+    "tags": {
+      "name": "Weiterstadt",
+      "operator": "DB Netz AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FWI",
+      "railway:station_category": "6",
+      "uic_ref": "8006306",
+      "wheelchair": "no",
+      "wikidata": "Q801589",
+      "wikipedia": "de:Bahnhof Weiterstadt"
+    }
+  },
+  {
+    "type": "node",
+    "id": 141307127,
+    "lat": 49.8320201,
+    "lon": 8.7439982,
+    "tags": {
+      "name": "Ober-Ramstadt",
+      "railway": "station",
+      "railway:ref": "FORA",
+      "uic_ref": "8004497",
+      "wheelchair": "yes",
+      "wikidata": "Q7074718"
+    }
+  },
+  {
+    "type": "node",
+    "id": 224846063,
+    "lat": 49.9137369,
+    "lon": 8.6454751,
+    "tags": {
+      "name": "Darmstadt-Arheilgen",
+      "network": "RMV",
+      "operator": "DB Netz AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FDA",
+      "uic_ref": "8001378",
+      "wheelchair": "limited",
+      "wikidata": "Q9202355"
+    }
+  },
+  {
+    "type": "node",
+    "id": 253212060,
+    "lat": 49.9071438,
+    "lon": 8.6798879,
+    "tags": {
+      "name": "Darmstadt-Kranichstein",
+      "operator": "DB Netz AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FDK",
+      "railway:station_category": "6",
+      "train": "yes",
+      "uic_ref": "8001380",
+      "wheelchair": "no",
+      "wikidata": "Q800644",
+      "wikipedia": "de:Bahnhof Darmstadt-Kranichstein"
+    }
+  },
+  {
+    "type": "node",
+    "id": 2476435975,
+    "lat": 49.8921078,
+    "lon": 8.6540718,
+    "tags": {
+      "name": "Darmstadt Nord",
+      "old_name": "Nordbahnhof",
+      "operator": "DB Netz AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FDN",
+      "railway:station_category": "5",
+      "uic_ref": "8001375",
+      "wheelchair": "no",
+      "wikipedia": "de:Bahnhof Darmstadt Nord"
+    }
+  },
+  {
+    "type": "node",
+    "id": 3175310444,
+    "lat": 49.8728528,
+    "lon": 8.6294113,
+    "tags": {
+      "name": "Darmstadt Hauptbahnhof",
+      "operator": "DB Netz AG;DB Station&Service AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FD",
+      "railway:station_category": "2",
+      "train": "yes",
+      "uic_ref": "8000068",
+      "wheelchair": "yes",
+      "wikidata": "Q682529",
+      "wikipedia": "de:Darmstadt Hauptbahnhof"
+    }
+  },
+  {
+    "type": "node",
+    "id": 3175310445,
+    "lat": 49.8744389,
+    "lon": 8.6741181,
+    "tags": {
+      "name": "Darmstadt Ost",
+      "old_name": "Rosenhöhe",
+      "railway": "station",
+      "railway:ref": "FDO",
+      "uic_ref": "8001376",
+      "wheelchair": "limited",
+      "wikidata": "Q800646"
+    }
+  },
+  {
+    "type": "node",
+    "id": 3193913389,
+    "lat": 49.9217115,
+    "lon": 8.7459623,
+    "tags": {
+      "name": "Messel",
+      "operator": "DB Netz AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FMES",
+      "railway:station_category": "6",
+      "uic_ref": "8003996",
+      "wikidata": "Q801175",
+      "wikipedia": "de:Bahnhof Messel"
+    }
+  },
+  {
+    "type": "node",
+    "id": 3193913381,
+    "lat": 49.8568037, 
+    "lon": 8.6366620,
+    "tags": {
+      "name": "Darmstadt Süd",
+      "operator": "DB Netz AG",
+      "public_transport": "station",
+      "railway": "station",
+      "railway:ref": "FDS",
+      "railway:station_category": "6",
+      "uic_ref": "8003996",
+      "wikidata": "Q801175",
+      "wikipedia": "de:Bahnhof Darmstadt Süd"
+    }
+  }
+  
+    ]
+  }
