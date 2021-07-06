@@ -1,6 +1,7 @@
 import 'package:context_awareness/provider/ActivityProvider.dart';
 import 'package:context_awareness/provider/AlarmProvider.dart';
 import 'package:context_awareness/provider/LocationProvider.dart';
+import 'package:context_awareness/provider/PauseProvider.dart';
 import 'package:context_awareness/provider/RMVProvider.dart';
 import 'package:context_awareness/widgets/home.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +10,16 @@ import 'package:context_awareness/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 //import 'package:context_awareness/widgets/home.dart';
 
-void main() => runApp(
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => RMVProvider()),
-      ChangeNotifierProvider(create: (_) => AlarmProvider()),
-      ChangeNotifierProvider(create: (_) => ActivityProvider()),
-      ChangeNotifierProvider(create: (_) => LocationProvider())
-    ],
-    child: AwareMe(),
-  )
-  );
+void main() => runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RMVProvider()),
+        ChangeNotifierProvider(create: (_) => AlarmProvider()),
+        ChangeNotifierProvider(create: (_) => ActivityProvider()),
+        ChangeNotifierProvider(create: (_) => LocationProvider()),
+        ChangeNotifierProvider(create: (_) => PauseProvider()),
+      ],
+      child: AwareMe(),
+    ));
 
 class AwareMe extends StatelessWidget {
   @override
