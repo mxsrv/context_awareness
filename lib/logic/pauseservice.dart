@@ -2,7 +2,6 @@ import 'package:activity_recognition_flutter/activity_recognition_flutter.dart';
 import 'package:context_awareness/provider/PauseProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:device_apps/device_apps.dart';
 import 'package:provider/provider.dart';
 
 class PauseService {
@@ -27,7 +26,7 @@ class PauseService {
           if (worktime == 0) {
             context.read<PauseProvider>().startStopwatch();
           } else if (worktime / 1000 / 60 > 2) {
-          // } else if (worktime / 1000 / 60 / 60 > 2) {
+            // } else if (worktime / 1000 / 60 / 60 > 2) {
             // consider taking a break
             needsBreak = true;
             return true;
@@ -36,8 +35,8 @@ class PauseService {
       }
       if (event.type.toString().split('.').last == "ON_FOOT" ||
           event.type.toString().split('.').last == "ON_BICYCLE") {
-            needsBreak = false;
-            context.read<PauseProvider>().resetStopwatch();
+        needsBreak = false;
+        context.read<PauseProvider>().resetStopwatch();
       }
     }
     return false;

@@ -31,9 +31,79 @@ class _HomePageState extends State<HomePage> {
     LocationData? locationData =
         context.watch<LocationProvider>().latestLocationData;
 
-    Future<Widget> switchContext() async {
-      if (!rmvActive && !alarmActive && !pauseActive) {
-        return Text("No service active!");
+    Widget buildAlarmWidget() {
+      if (!alarmActive) {
+        return Text("Not active!");
+      }
+      if (locationData == null) {
+        return Text("No Location data!");
+      }
+      bool alarm = alarmActive
+          ? AlarmService.getCurrentAlarmStatus(locationData, latestActivity)
+          : false;
+      if (alarm) {
+        print("You should set your alarm!");
+        return Column(
+          children: [
+            Text("You are at Home, it is after 11pm and your status is STILL."),
+            Text("You might want to set your alarm for tomorrow!"),
+            MaterialButton(
+              onPressed: AlarmService.setAlarm,
+              child: Text("Set Alarm",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+              color: Colors.blue,
+            ),
+          ],
+        );
+      } else {
+        return Text("Active.");
+      }
+    }
+
+    Widget buildPauseWidget() {
+      if (!pauseActive) {
+        return Text("Not active!");
+      }
+      if (locationData == null) {
+        return Text("No Location data!");
+      }
+      bool pause = pauseActive
+          ? PauseService.getCurrentPauseStatus(
+              locationData, latestActivity, context)
+          : false;
+      if (pause) {
+        return Column(
+          children: [
+            Text("You have been working for over 2 hours."),
+            Text("(" +
+                ((context.watch<PauseProvider>().workTime / 1000 / 60 * 10)
+                            .truncate() /
+                        10)
+                    .toString() +
+                "min)"),
+            Text("You should take a break and move!")
+          ],
+        );
+      } else {
+        return Column(
+          children: [
+            Text("Active."),
+            Text("You have been working for: " +
+                ((context.watch<PauseProvider>().workTime / 1000 / 60 * 10)
+                            .truncate() /
+                        10)
+                    .toString() +
+                "min")
+          ],
+        );
+      }
+    }
+
+    Future<Widget> buildRMVWidget() async {
+      if (!rmvActive) {
+        return Text("Not active!");
       }
       if (locationData == null) {
         return Text("No Location data!");
@@ -62,61 +132,16 @@ class _HomePageState extends State<HomePage> {
           );
         } else {
           return Center(
-            child: Text(
-                "You are too far away from a train station or you are in motion"),
-          );
+              child: Column(
+            children: [
+              Text("Active."),
+              Text(
+                  "You are too far away from a train station or you are in motion."),
+            ],
+          ));
         }
-      }
-
-      bool alarm = alarmActive
-          ? AlarmService.getCurrentAlarmStatus(locationData, latestActivity)
-          : false;
-      if (alarm) {
-        print("You should set your alarm!");
-        return Column(
-          children: [
-            Text("You are at Home, it is after 11pm and your status is STILL."),
-            Text("You might want to set your alarm for tomorrow!"),
-            MaterialButton(
-              onPressed: AlarmService.setAlarm,
-              child: Text("Set Alarm",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              color: Colors.blue,
-            ),
-          ],
-        );
-      }
-      bool pause = pauseActive
-          ? PauseService.getCurrentPauseStatus(
-              locationData, latestActivity, context)
-          : false;
-      if (pause) {
-        return Column(
-          children: [
-            Text("You have been working for over 2 hours."),
-            Text("You should take a break and move!")
-          ],
-        );
-      }
-      try {
-        switch (latestActivity.type.toString().split('.').last) {
-          case "STILL":
-            return Text("You are sitting",
-                style: GoogleFonts.poppins(fontSize: 14));
-          case "ON_BICYCLE":
-            return Text("You are on a bicycle",
-                style: GoogleFonts.poppins(fontSize: 14));
-          case "ON_FOOT":
-            return Text("You are walking",
-                style: GoogleFonts.poppins(fontSize: 14));
-          default:
-            return Text("Unknown", style: GoogleFonts.poppins(fontSize: 14));
-        }
-      } catch (error) {
-        print(error);
-        return Text("Unknown", style: GoogleFonts.poppins(fontSize: 14));
+      } else {
+        return Text("Not active.");
       }
     }
 
@@ -138,28 +163,56 @@ class _HomePageState extends State<HomePage> {
     //   ),
     // );
 
-    return FutureBuilder<Widget>(
-        future: switchContext(),
-        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-          return SafeArea(
-            child: Align(
-              alignment: Alignment(0, -0.9),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
+    Widget buildStatusWidget() {
+      if (!rmvActive && !pauseActive && !alarmActive) {
+        return Text("No information about Location and Activity Status");
+      }
+      if (locationData == null) {
+        return Text("No location data.");
+      } else {
+        return Column(
+          children: [
+            Text("You are at longitute: " +
+                locationData.longitude.toString() +
+                " and latitute: " +
+                locationData.latitude.toString()),
+            Text("Your Activity Status: " + latestActivity.toString())
+          ],
+        );
+      }
+    }
+
+    return Center(
+      child: Column(
+        children: [
+          Text(
+            'Status Alarm-Service: ',
+            style: GoogleFonts.poppins(fontSize: 14),
+          ),
+          buildAlarmWidget(),
+          Text(
+            'Status MakeAPause-Service: ',
+            style: GoogleFonts.poppins(fontSize: 14),
+          ),
+          buildPauseWidget(),
+          FutureBuilder<Widget>(
+              future: buildRMVWidget(),
+              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                return Column(
                   children: [
                     Text(
-                      'This is your current status:',
+                      'Status RMV-Service: ',
                       style: GoogleFonts.poppins(fontSize: 14),
                     ),
                     snapshot.hasData
                         ? snapshot.requireData
-                        : Text("No Service Active"),
+                        : Text("Not active."),
                   ],
-                ),
-              ),
-            ),
-          );
-        });
+                );
+              }),
+          buildStatusWidget()
+        ],
+      ),
+    );
   }
 }
