@@ -1,4 +1,9 @@
+import 'package:context_awareness/provider/ActivityProvider.dart';
+import 'package:context_awareness/provider/AlarmProvider.dart';
+import 'package:context_awareness/provider/LocationProvider.dart';
+import 'package:context_awareness/provider/RMVProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../logic/rmvservice.dart';
 import '../logic/alarmservice.dart';
@@ -9,29 +14,30 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _alarm = false;
-  bool _rmv = false;
-
-  _switchAlarmClock(bool value) {
-    if(value){
-      AlarmService.startAlarmService();
-    }
-    else{
-      AlarmService.stopAlarmService();
-    }
-  }
-
-  _switchRMV(bool value) {
-    if(value){
-      RMVService.startRMVService();
-    }
-    else{
-      RMVService.stopRMVService();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    _switchRMV(bool value) {
+      if (value) {
+        context.read<ActivityProvider>().startTracking();
+        context.read<RMVProvider>().setActive();
+        context.read<LocationProvider>().startLocationService();
+      } else {
+        context.read<RMVProvider>().setInactive();
+      }
+    }
+
+    _switchAlarmClock(bool value) {
+      if (value) {
+        context.read<ActivityProvider>().startTracking();
+        context.read<AlarmProvider>().setActive();
+        context.read<LocationProvider>().startLocationService();
+      } else {
+        context.read<AlarmProvider>().setInactive();
+      }
+    }
+
     return Scaffold(
         body: Container(
       padding: EdgeInsets.symmetric(vertical: 40, horizontal: 1),
@@ -82,8 +88,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 Switch(
-                    value: _alarm,
-                    onChanged: (value) {_switchAlarmClock(value);},
+                    value: context.watch<AlarmProvider>().alarmActive,
+                    onChanged: (value) {
+                      _switchAlarmClock(value);
+                    },
                     activeColor: Colors.black,
                     activeTrackColor: Colors.green)
               ],
@@ -108,8 +116,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 Switch(
-                    value: _rmv,
-                    onChanged: (value) {_switchRMV(value);},
+                    value: context.watch<RMVProvider>().rmvActive,
+                    onChanged: (value) {
+                      _switchRMV(value);
+                    },
                     activeColor: Colors.black,
                     activeTrackColor: Colors.green)
               ],

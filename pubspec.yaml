@@ -31,6 +31,8 @@ dependencies:
   google_fonts: ^2.1.0
   activity_recognition_flutter: ^4.0.3
   permission_handler: ^8.1.2
+  provider: ^5.0.0
+  location: ^4.3.0
 
 dev_dependencies:
   flutter_test:
