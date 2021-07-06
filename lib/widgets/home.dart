@@ -1,9 +1,14 @@
 import 'dart:io';
 
 import 'package:activity_recognition_flutter/activity_recognition_flutter.dart';
+import 'package:context_awareness/logic/alarmservice.dart';
+import 'package:context_awareness/logic/pauseservice.dart';
 import 'package:context_awareness/logic/rmvservice.dart';
 import 'package:context_awareness/provider/ActivityProvider.dart';
+import 'package:context_awareness/provider/AlarmProvider.dart';
 import 'package:context_awareness/provider/LocationProvider.dart';
+import 'package:context_awareness/provider/PauseProvider.dart';
+import 'package:context_awareness/provider/RMVProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,12 +23,54 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    ActivityEvent latestActivity = context.watch<ActivityProvider>().latestActivity;
-    LocationData? locationData = context.watch<LocationProvider>().latestLocationData;
+    bool rmvActive = context.watch<RMVProvider>().rmvActive;
+    bool alarmActive = context.watch<AlarmProvider>().alarmActive;
+    bool pauseActive = context.watch<PauseProvider>().workTimerActive;
 
-    Text switchContext() {
-      if(locationData != null){
-        RMVService.getCurrentRMVStatus(locationData, latestActivity);
+    ActivityEvent latestActivity =
+        context.watch<ActivityProvider>().latestActivity;
+    LocationData? locationData =
+        context.watch<LocationProvider>().latestLocationData;
+
+    Widget switchContext() {
+      if (!rmvActive && !alarmActive && !pauseActive) {
+        return Text("No service active!");
+      }
+      if (locationData == null) {
+        return Text("No Location data!");
+      }
+      // RMVService.getCurrentRMVStatus(locationData, latestActivity);
+      bool alarm = alarmActive
+          ? AlarmService.getCurrentAlarmStatus(locationData, latestActivity)
+          : false;
+      if (alarm) {
+        print("You should set your alarm!");
+        return Column(
+          children: [
+            Text("You are at Home, it is after 11pm and your status is STILL."),
+            Text("You might want to set your alarm for tomorrow!"),
+            MaterialButton(
+              onPressed: AlarmService.setAlarm,
+              child: Text("Set Alarm",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+              color: Colors.blue,
+            ),
+          ],
+        );
+      }
+      bool pause = pauseActive
+          ? PauseService.getCurrentPauseStatus(
+              locationData, latestActivity, context)
+          : false;
+      if (pause) {
+        return Column(
+          children: [
+            Text("You have been working for over 2 hours."),
+            Text("You should take a break and move!")
+          ],
+        );
       }
       try {
         switch (latestActivity.type.toString().split('.').last) {
