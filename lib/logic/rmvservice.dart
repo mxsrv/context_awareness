@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:activity_recognition_flutter/activity_recognition_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
+import 'package:url_launcher/url_launcher.dart';
   
 enum RMVStatus {OUTSIDE, ONSTATION}
 
@@ -21,10 +22,10 @@ class RMVService {
     }
 
     for (LocationC station in locations) {
-      if (station.latitude + 0.02 >= locationData.latitude! &&
-          station.latitude - 0.02 <= locationData.latitude! &&
-          station.longitude + 0.02 >= locationData.longitude! &&
-          station.longitude - 0.02 <= locationData.longitude! && event.type.toString().split('.').last == "STILL") {
+      if (station.latitude + 0.005 >= locationData.latitude! &&
+          station.latitude - 0.005 <= locationData.latitude! &&
+          station.longitude + 0.005 >= locationData.longitude! &&
+          station.longitude - 0.005 <= locationData.longitude! && event.type.toString().split('.').last == "STILL") {
         print("we think you are on the Trainstation " +
             station.name +
             " and waiting for your train to arrive");
@@ -57,6 +58,8 @@ class RMVService {
     }
     return locations;
   }
+
+  static void openRMV() async => await canLaunch('https://www.rmv.de/c/de/start/ring') ? await launch('https://www.rmv.de/c/de/start/ring') : throw 'Could not launch rmv.de';
 }
 
 class LocationC {

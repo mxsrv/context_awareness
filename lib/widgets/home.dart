@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:activity_recognition_flutter/activity_recognition_flutter.dart';
 import 'package:context_awareness/logic/alarmservice.dart';
 import 'package:context_awareness/logic/pauseservice.dart';
@@ -21,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  RMVStatus? _rmvStatus;
   @override
   Widget build(BuildContext context) {
     bool rmvActive = context.watch<RMVProvider>().rmvActive;
@@ -32,14 +31,43 @@ class _HomePageState extends State<HomePage> {
     LocationData? locationData =
         context.watch<LocationProvider>().latestLocationData;
 
-    Widget switchContext() {
+    Future<Widget> switchContext() async {
       if (!rmvActive && !alarmActive && !pauseActive) {
         return Text("No service active!");
       }
       if (locationData == null) {
         return Text("No Location data!");
       }
-      // RMVService.getCurrentRMVStatus(locationData, latestActivity);
+      // RMVService.getCurrentRMVStatus(locationData, latestActivity);\
+      print("RMVACTIVE: " + rmvActive.toString());
+      if (rmvActive) {
+        print("RMV ABFRAGE");
+        _rmvStatus =
+            await RMVService.getCurrentRMVStatus(locationData, latestActivity);
+        print("RMV STATUS: " + _rmvStatus.toString());
+        if (_rmvStatus == RMVStatus.ONSTATION) {
+          return Column(
+            children: [
+              Text("You are on a trainstation and waiting!"),
+              Text("Take a look at your connections"),
+              MaterialButton(
+                onPressed: RMVService.openRMV,
+                child: Text("rmv.de",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                color: Colors.blue,
+              ),
+            ],
+          );
+        } else {
+          return Center(
+            child: Text(
+                "You are too far away from a train station or you are in motion"),
+          );
+        }
+      }
+
       bool alarm = alarmActive
           ? AlarmService.getCurrentAlarmStatus(locationData, latestActivity)
           : false;
@@ -92,22 +120,46 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    return SafeArea(
-      child: Align(
-        alignment: Alignment(0, -0.9),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text(
-                'This is your current status:',
-                style: GoogleFonts.poppins(fontSize: 14),
+    // return SafeArea(
+    //   child: Align(
+    //     alignment: Alignment(0, -0.9),
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(8.0),
+    //       child: Column(
+    //         children: [
+    //           Text(
+    //             'This is your current status:',
+    //             style: GoogleFonts.poppins(fontSize: 14),
+    //           ),
+    //           switchContext(),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+
+    return FutureBuilder<Widget>(
+        future: switchContext(),
+        builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+          return SafeArea(
+            child: Align(
+              alignment: Alignment(0, -0.9),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'This is your current status:',
+                      style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                    snapshot.hasData
+                        ? snapshot.requireData
+                        : Text("No Service Active"),
+                  ],
+                ),
               ),
-              switchContext(),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }
