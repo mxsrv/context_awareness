@@ -22,10 +22,10 @@ class RMVService {
     }
 
     for (LocationC station in locations) {
-      if (station.latitude + 0.005 >= locationData.latitude! &&
-          station.latitude - 0.005 <= locationData.latitude! &&
-          station.longitude + 0.005 >= locationData.longitude! &&
-          station.longitude - 0.005 <= locationData.longitude! && event.type.toString().split('.').last == "STILL") {
+      if (station.latitude + 0.003 >= locationData.latitude! &&
+          station.latitude - 0.003 <= locationData.latitude! &&
+          station.longitude + 0.003 >= locationData.longitude! &&
+          station.longitude - 0.003 <= locationData.longitude! && event.type.toString().split('.').last == "STILL") {
         print("we think you are on the Trainstation " +
             station.name +
             " and waiting for your train to arrive");

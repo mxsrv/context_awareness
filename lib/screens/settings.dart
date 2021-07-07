@@ -4,6 +4,7 @@ import 'package:context_awareness/provider/LocationProvider.dart';
 import 'package:context_awareness/provider/PauseProvider.dart';
 import 'package:context_awareness/provider/RMVProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../logic/rmvservice.dart';
@@ -15,10 +16,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   @override
   Widget build(BuildContext context) {
-
     _switchRMV(bool value) {
       if (value) {
         context.read<ActivityProvider>().startTracking();
@@ -62,23 +61,24 @@ class _SettingsPageState extends State<SettingsPage> {
                   //button initialisation
                   icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.black45,
+                    color: Color(0xFF164A5C),
                   ),
                   onPressed: () {
                     Navigator.pop(context);
                   }),
               Text(
-                '   Einstellungen',
+                '   Settings',
                 style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black45),
+                    color: Color(0xFF164A5C)),
                 textAlign: TextAlign.center,
               ),
             ],
           ),
           Divider(
             thickness: 2,
+            color: Color(0xFF164A5C)
           ),
           Card(
               child: Padding(
@@ -89,12 +89,13 @@ class _SettingsPageState extends State<SettingsPage> {
               children: <Widget>[
                 RichText(
                   text: TextSpan(
-                    text: 'Wecker einstellen',
-                    style: TextStyle(color: Colors.black),
+                    text: 'Alarm Service',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' Der Wecker wird eingestellt',
-                          style: TextStyle(color: Colors.black)),
+                          text: ' Evening Alarm Reminder',
+                          style: TextStyle(
+                              color: Color(0xFF164A5C), fontSize: 12)),
                     ],
                   ),
                 ),
@@ -103,8 +104,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     onChanged: (value) {
                       _switchAlarmClock(value);
                     },
-                    activeColor: Colors.black,
-                    activeTrackColor: Colors.green)
+                    activeColor: Colors.grey,
+                    activeTrackColor: Color(0xFF164A5C),
+                    inactiveThumbColor: Color(0xFF164A5C),)
               ],
             ),
           )),
@@ -117,12 +119,13 @@ class _SettingsPageState extends State<SettingsPage> {
               children: <Widget>[
                 RichText(
                   text: TextSpan(
-                    text: 'RMV aktvieren',
-                    style: TextStyle(color: Colors.black),
+                    text: 'Train Service',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                     children: <TextSpan>[
                       TextSpan(
-                          text: '  RMV am Bahnhof öffnen',
-                          style: TextStyle(color: Colors.black)),
+                          text: '  Open RMV Timetable',
+                          style: TextStyle(
+                              color: Color(0xFF164A5C), fontSize: 12)),
                     ],
                   ),
                 ),
@@ -131,8 +134,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     onChanged: (value) {
                       _switchRMV(value);
                     },
-                    activeColor: Colors.black,
-                    activeTrackColor: Colors.green)
+                    activeColor: Colors.grey,
+                    activeTrackColor: Color(0xFF164A5C),
+                    inactiveThumbColor: Color(0xFF164A5C))
               ],
             ),
           )),
@@ -145,12 +149,13 @@ class _SettingsPageState extends State<SettingsPage> {
               children: <Widget>[
                 RichText(
                   text: TextSpan(
-                    text: 'activate pause timer',
-                    style: TextStyle(color: Colors.black),
+                    text: 'Pause Service',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'take a pause every 2 hours',
-                          style: TextStyle(color: Colors.black)),
+                          text: ' Take-A-Pause Reminder',
+                          style: TextStyle(
+                              color: Color(0xFF164A5C), fontSize: 12)),
                     ],
                   ),
                 ),
@@ -159,8 +164,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     onChanged: (value) {
                       _switchPause(value);
                     },
-                    activeColor: Colors.black,
-                    activeTrackColor: Colors.green)
+                    activeColor: Colors.grey,
+                    activeTrackColor: Color(0xFF164A5C),
+                    inactiveThumbColor: Color(0xFF164A5C))
               ],
             ),
           )),

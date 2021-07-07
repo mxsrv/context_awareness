@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class PauseService {
   static bool needsBreak = false;
-  // if still && atHome && time > 23:00 -> remind user to set alarm
+  // if still && atHome && work time > 2h -> remind user to take a break
   static bool getCurrentPauseStatus(
       LocationData locationData, ActivityEvent event, BuildContext context) {
     int worktime = context.watch<PauseProvider>().workTime;
@@ -25,7 +25,8 @@ class PauseService {
           print(worktime / 1000 / 60 / 60);
           if (worktime == 0) {
             context.read<PauseProvider>().startStopwatch();
-          } else if (worktime / 1000 / 60 > 2) {
+            print("started stopwatch");
+          } else if (worktime / 1000 / 60 / 60 > 2) {
             // } else if (worktime / 1000 / 60 / 60 > 2) {
             // consider taking a break
             needsBreak = true;
