@@ -2,7 +2,7 @@
 
 ## Authorizations for the application 
 
-The application requests authorization for your location and activity while it is running to determine your position on the map and your current activity. Apart from that the user can run the application as a background service to passively download and upload data. This process can be stopped by pressing on the application icon -> App-Details -> Force Stop 
+The application requests authorization for your location and activity while it is running to determine your position on the map and your current activity. Apart from that the application runs as a foreground service. This process can be stopped by pressing on the application icon -> App-Details -> Force Stop 
 
 
 ## Getting Started
