@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:context_awareness/widgets/drawer.dart';
 import 'package:provider/provider.dart';
-//import 'package:context_awareness/widgets/home.dart';
 
 void main() => runApp(MultiProvider(
       providers: [

@@ -45,8 +45,10 @@ class _HomePageState extends State<HomePage> {
         print("You should set your alarm!");
         return Column(
           children: [
-            Text("You are at Home, it is after 11pm and your status is STILL."),
-            Text("You might want to set your alarm for tomorrow!"),
+            Text("You are at Home, it is after 11pm and your status is STILL.",
+                style: GoogleFonts.poppins(fontSize: 12)),
+            Text("You might want to set your alarm for tomorrow!",
+                style: GoogleFonts.poppins(fontSize: 12)),
             MaterialButton(
               onPressed: AlarmService.setAlarm,
               child: Text("Set Alarm",
@@ -58,16 +60,17 @@ class _HomePageState extends State<HomePage> {
           ],
         );
       } else {
-        return Text("Active.");
+        return Text("Active.", style: GoogleFonts.poppins(fontSize: 13));
       }
     }
 
     Widget buildPauseWidget() {
       if (!pauseActive) {
-        return Text("Not active!");
+        return Text("Not active!", style: GoogleFonts.poppins(fontSize: 13));
       }
       if (locationData == null) {
-        return Text("No Location data!");
+        return Text("No Location data!",
+            style: GoogleFonts.poppins(fontSize: 13));
       }
       bool pause = pauseActive
           ? PauseService.getCurrentPauseStatus(
@@ -76,26 +79,32 @@ class _HomePageState extends State<HomePage> {
       if (pause) {
         return Column(
           children: [
-            Text("You have been working for over 2 hours."),
-            Text("(" +
-                ((context.watch<PauseProvider>().workTime / 1000 / 60 * 10)
-                            .truncate() /
-                        10)
-                    .toString() +
-                "min)"),
-            Text("You should take a break and move!")
+            Text("You have been working for over 2 hours.",
+                style: GoogleFonts.poppins(fontSize: 13)),
+            Text(
+                "(" +
+                    ((context.watch<PauseProvider>().workTime / 1000 / 60 * 10)
+                                .truncate() /
+                            10)
+                        .toString() +
+                    "min)",
+                style: GoogleFonts.poppins(fontSize: 13)),
+            Text("You should take a break and move!",
+                style: GoogleFonts.poppins(fontSize: 13))
           ],
         );
       } else {
         return Column(
           children: [
-            Text("Active."),
-            Text("You have been working for: " +
-                ((context.watch<PauseProvider>().workTime / 1000 / 60 * 10)
-                            .truncate() /
-                        10)
-                    .toString() +
-                "min")
+            Text("Active.", style: GoogleFonts.poppins(fontSize: 13)),
+            Text(
+                "You have been working for: " +
+                    ((context.watch<PauseProvider>().workTime / 1000 / 60 * 10)
+                                .truncate() /
+                            10)
+                        .toString() +
+                    "min",
+                style: GoogleFonts.poppins(fontSize: 13))
           ],
         );
       }
@@ -103,23 +112,23 @@ class _HomePageState extends State<HomePage> {
 
     Future<Widget> buildRMVWidget() async {
       if (!rmvActive) {
-        return Text("Not active!");
+        return Text("Not active!", style: GoogleFonts.poppins(fontSize: 13));
       }
       if (locationData == null) {
-        return Text("No Location data!");
+        return Text("No Location data!",
+            style: GoogleFonts.poppins(fontSize: 13));
       }
       // RMVService.getCurrentRMVStatus(locationData, latestActivity);\
-      print("RMVACTIVE: " + rmvActive.toString());
       if (rmvActive) {
-        print("RMV ABFRAGE");
         _rmvStatus =
             await RMVService.getCurrentRMVStatus(locationData, latestActivity);
-        print("RMV STATUS: " + _rmvStatus.toString());
         if (_rmvStatus == RMVStatus.ONSTATION) {
           return Column(
             children: [
-              Text("You are on a trainstation and waiting!"),
-              Text("Take a look at your connections"),
+              Text("You are on a trainstation and waiting!",
+                  style: GoogleFonts.poppins(fontSize: 13)),
+              Text("Take a look at your connections",
+                  style: GoogleFonts.poppins(fontSize: 13)),
               MaterialButton(
                 onPressed: RMVService.openRMV,
                 child: Text("rmv.de",
@@ -134,9 +143,11 @@ class _HomePageState extends State<HomePage> {
           return Center(
               child: Column(
             children: [
-              Text("Active."),
-              Text(
-                  "You are too far away from a train station or you are in motion."),
+              Text("Active.", style: GoogleFonts.poppins(fontSize: 13)),
+              Text("You are too far away from a train station",
+                  style: GoogleFonts.poppins(fontSize: 13)),
+              Text("or you are in motion.",
+                  style: GoogleFonts.poppins(fontSize: 13)),
             ],
           ));
         }
@@ -144,24 +155,6 @@ class _HomePageState extends State<HomePage> {
         return Text("Not active.");
       }
     }
-
-    // return SafeArea(
-    //   child: Align(
-    //     alignment: Alignment(0, -0.9),
-    //     child: Padding(
-    //       padding: const EdgeInsets.all(8.0),
-    //       child: Column(
-    //         children: [
-    //           Text(
-    //             'This is your current status:',
-    //             style: GoogleFonts.poppins(fontSize: 14),
-    //           ),
-    //           switchContext(),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
 
     Widget buildStatusWidget() {
       if (!rmvActive && !pauseActive && !alarmActive) {
@@ -185,32 +178,67 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Column(
         children: [
-          Text(
-            'Status Alarm-Service: ',
-            style: GoogleFonts.poppins(fontSize: 14),
+          Card(
+            child: Column(
+              children: [
+                Text(
+                  'Status Alarm-Service: ',
+                  style: GoogleFonts.poppins(fontSize: 18),
+                ),
+                Divider(thickness: 2),
+                buildAlarmWidget(),
+              ],
+            ),
           ),
-          buildAlarmWidget(),
-          Text(
-            'Status MakeAPause-Service: ',
-            style: GoogleFonts.poppins(fontSize: 14),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.02),
+            child: Divider(thickness: 2, color: Color(0xFF164A5C)),
           ),
-          buildPauseWidget(),
+          Card(
+            child: Column(
+              children: [
+                Text(
+                  'Status MakeAPause-Service: ',
+                  style: GoogleFonts.poppins(fontSize: 18),
+                ),
+                Divider(thickness: 2),
+                buildPauseWidget(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.02),
+            child: Divider(thickness: 2, color: Color(0xFF164A5C)),
+          ),
           FutureBuilder<Widget>(
               future: buildRMVWidget(),
               builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                return Column(
-                  children: [
-                    Text(
-                      'Status RMV-Service: ',
-                      style: GoogleFonts.poppins(fontSize: 14),
-                    ),
-                    snapshot.hasData
-                        ? snapshot.requireData
-                        : Text("Not active."),
-                  ],
+                return Card(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Status RMV-Service: ',
+                        style: GoogleFonts.poppins(fontSize: 18),
+                      ),
+                      Divider(thickness: 2),
+                      snapshot.hasData
+                          ? snapshot.requireData
+                          : Text("Not active."),
+                    ],
+                  ),
                 );
               }),
-          buildStatusWidget()
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.02),
+            child: Divider(thickness: 2, color: Color(0xFF164A5C)),
+          ),
+          Card(
+              child: Column(
+            children: [buildStatusWidget(), Divider(thickness: 2)],
+          ))
         ],
       ),
     );
